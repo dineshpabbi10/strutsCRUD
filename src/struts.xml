@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+    "http://struts.apache.org/dtds/struts-2.5.dtd">
+    
+    
+<struts>
+	<package name="default" extends="struts-default">
+		<action name="" >
+			<result>/Login.jsp</result>
+		</action>
+		<action name="Login" class="org.employee.crud.actions.LoginAction">
+        	<result name="success" type="redirectAction">getEmployees</result>
+			<result name="input">/Login.jsp</result>
+			<result name="error">/Error.jsp</result>
+		</action>
+		
+		<action name="getEmployees" class="org.employee.crud.actions.EmployeesCRUD" method="getAllEmployees" >
+			<result name="success">/AllUsers.jsp</result>
+			<result name="error">/Error.jsp</result>
+		</action>
+		
+		<action name="deleteEmployees" class="org.employee.crud.actions.EmployeesCRUD" method="deleteEmployee" >
+			<result name="success" type="redirectAction">getEmployees</result>
+			<result name="error">/Error.jsp</result>
+		</action>
+		
+		<action name="editEmployees" class="org.employee.crud.actions.EmployeesCRUD" method="editEmployee" >
+			<result name="success">/EditEmployee.jsp</result>
+			<result name="error">/Error.jsp</result>
+		</action>
+		
+		<action name="updateEmployees" class="org.employee.crud.actions.EmployeesCRUD" method="updateEmployee" >
+			<result name="success" type="redirectAction">getEmployees</result>
+			<result name="error">/Error.jsp</result>
+		</action>
+	</package>
+</struts>
