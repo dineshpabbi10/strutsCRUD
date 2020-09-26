@@ -6,8 +6,14 @@
     
 <struts>
 	<package name="default" extends="struts-default">
-		<action name="" >
-			<result>/Login.jsp</result>
+		<interceptors>
+			<interceptor name = "test" class = "org.employee.crud.interceptors.TestInterceptor" />
+		</interceptors>
+		
+		<action name="" class="org.employee.crud.actions.SessionAction">
+			<interceptor-ref name="test" />
+			<result name="redirect" type="redirectAction">getEmployees</result>
+			<result name="success">/Login.jsp</result>
 		</action>
 		<action name="Login" class="org.employee.crud.actions.LoginAction">
         	<result name="success" type="redirectAction">getEmployees</result>
@@ -16,21 +22,25 @@
 		</action>
 		
 		<action name="getEmployees" class="org.employee.crud.actions.EmployeesCRUD" method="getAllEmployees" >
+			<interceptor-ref name="test" />
 			<result name="success">/AllUsers.jsp</result>
 			<result name="error">/Error.jsp</result>
 		</action>
 		
 		<action name="deleteEmployees" class="org.employee.crud.actions.EmployeesCRUD" method="deleteEmployee" >
+			<interceptor-ref name="test" />
 			<result name="success" type="redirectAction">getEmployees</result>
 			<result name="error">/Error.jsp</result>
 		</action>
 		
 		<action name="editEmployees" class="org.employee.crud.actions.EmployeesCRUD" method="editEmployee" >
+			<interceptor-ref name="test" />
 			<result name="success">/EditEmployee.jsp</result>
 			<result name="error">/Error.jsp</result>
 		</action>
 		
 		<action name="updateEmployees" class="org.employee.crud.actions.EmployeesCRUD" method="updateEmployee" >
+			<interceptor-ref name="test" />
 			<result name="success" type="redirectAction">getEmployees</result>
 			<result name="error">/Error.jsp</result>
 		</action>
